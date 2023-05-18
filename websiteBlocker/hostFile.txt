@@ -1,0 +1,17 @@
+Within the host file in windows you may need to add the IP address of the
+website you wish to work with/block
+
+It follwows the pattern:
+
+IP address      Website name
+
+This means that is you want to block the website then you put the IP you want to 
+redirect to.
+
+127.0.0.1       www.Facebook.com
+
+Thus facebook will be re-directed to 127.0.0.1
+
+
+
+
