@@ -15,3 +15,6 @@ Thus facebook will be re-directed to 127.0.0.1
 
 
 
+127.0.0.1   www.facebook.com
+127.0.0.1   facebook.com
+127.0.0.1   www.hotmail.com

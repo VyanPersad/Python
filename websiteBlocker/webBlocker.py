@@ -30,9 +30,9 @@ while True:
           dt.now().month,
           dt.now().day, 8) < dt.now() < dt(dt.now().year,
                                            dt.now().month,
-                                           dt.now().day, 16):
+                                           dt.now().day, 22):
         print("Working Hours.....")
-        #In this case we pass the test filepath, in reality for a working version you willl pass
+        #In this case we pass the test filepath, in reality for a working version you will pass
         #the hostfilepath
         with open(filepath, 'r+') as file:
             content = file.read()
