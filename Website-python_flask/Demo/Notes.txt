@@ -1,0 +1,20 @@
+-Create a virtual environment.
+-Create a folder in the same directory as the website file.
+-Place your website folders in the new folder.
+-Create the environment in this new folder.
+-Essentially the new folder wher you will have your files 
+    will also contain all the folders and python files.
+-From this folder you can openthe terminal form this location
+-Once you're in the directory you run:
+        python -m venv virtual 
+
+-This will create a virtual environment with the name 
+    virtual  
+
+-This folder will now have everything you need. 
+
+-From this you need to change the directory to the 
+    Scripts folder in the virtual folder and then run 
+        - pip install flask
+
+-Then you run the website script file.        

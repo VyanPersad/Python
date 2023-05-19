@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Sample Flask App</title>
+  <!--CSS files go here and are in this format. 
+  Another way around this would be to place the css styling in style tags in 
+  each individual html file.-->
+  <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <h1 class="logo">Sample web app</h1>
+      <strong>
+        <nav>
+          <ul class="menu">
+            <!--This triggers the home and about functions in the python file.
+            This home and about refer to the respective classes in the appropriate 
+            html files.-->
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+          </ul>
+        </nav>
+      </strong>
+    </div>
+  </header>
+  <!--This below shows via jinja code where to place the other templates 
+  that make up the website.-->
+  <div class="container">
+    {%block content%}
+    {%endblock%}
+  </div>
+</body>
+
+</html>
