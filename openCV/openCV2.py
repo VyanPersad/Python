@@ -1,11 +1,11 @@
 import numpy as np
 import cv2
 
-imgFile = 'test_img.png'
+imgFile = 'bcc1.png'
 img = cv2.imread(imgFile)
 #This is the location of the particular pixel
 px = img[100,100]
-#Thesea re the details
+#These are the details
 print(px)
 
 blue = img[100,100,0]
