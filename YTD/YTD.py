@@ -18,7 +18,7 @@ Window.size = (500,600)
 class MyApp(MDApp):
     def getLinkInfo(self,event, layout):
         self.link = self.input.text
-        self.chkLink = re.match("^https://www.yoputube.com/.*", self.link)
+        self.chkLink = re.match("^https://www.youtube.com/.*", self.link)
         print(self.chkLink)
 
         if(self.chkLink):
