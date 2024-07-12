@@ -2,7 +2,7 @@ import sqlite3
 
 
 class Database:
-    #You essentially make the connect function a constructorby using __init__
+    #You essentially make the connect function a constructor by using __init__
     #You also need to pass self for all the functions.
     #For all methods the close attribute is commented out as if not then on
     #executing the database will close preventing further access.
@@ -75,7 +75,7 @@ class Database:
 
 
 #You need to call the function to ensure that it is executed when called by frontend.
-#Now we don't need these function as the __innit__ function automatically connects
+#Now we don't need these function as the __init__ function automatically connects
 #Database.connect()
 #To test the functions
 #Database.insert("Moby Dick", "John Smith", 1989, 15248)
