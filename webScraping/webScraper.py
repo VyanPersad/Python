@@ -1,10 +1,17 @@
-import requests
 from bs4 import BeautifulSoup
+import os
+import functions
+import requests
 
-r = requests.get(
-    "https://www.amazon.com/s?k=computer+components&adgrpid=81801918615&hvadid=585362546850&hvdev=c&hvlocphy=9075961&hvnetw=g&hvqmt=b&hvrand=847316709651011563&hvtargid=kwd-10827891&hydadcr=22309_13333543&tag=hydglogoo-20&ref=pd_sl_9aul9hj8bg_b"
-)
-c = r.content
 
-soup = BeautifulSoup(c, "html.parser")
-all=soup.find_all("span",{"class":})
+def main_scraper(url, dir_path):
+    functions.create_dir(dir_path)
+    src_code = requests.get(url)
+    src_text = src_code.text
+    soup = BeautifulSoup(src_text,"html.parser")
+    print(soup.find_all("div", {"class":"product-card__price sf-price"}))
+
+url = "https://www.pricesmart.com/en-tt/category/Electronics/E10D24?fq=category%3B%22E10D24015%22" 
+dir_path = "test"
+
+main_scraper(url, dir_path)
