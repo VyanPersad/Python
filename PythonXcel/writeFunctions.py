@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import html5lib
 import os
 
 def write_to_csv(dataFrame, destpath, file_name):

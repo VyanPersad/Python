@@ -99,12 +99,12 @@ sb1 = Scrollbar(window)
 sb1.grid(row=2, column=2, rowspan=6)
 list1.configure(yscrollcommand=sb1.set)
 sb1.configure(command=list1.yview)
-#This allows for the element in the listbox to be selcted
+#This allows for the element in the listbox to be selected
 #It triggers the get_selected_row method
 #For tkinter you don't need to use brackets
 list1.bind('<<ListboxSelect>>', get_selected_row)
 
-#Every button has a coomand that triggers a method, no need for brackets.
+#Every button has a command that triggers a method, no need for brackets.
 view_all = Button(window, text="View All", width=12, command=view_command)
 view_all.grid(row=2, column=3)
 

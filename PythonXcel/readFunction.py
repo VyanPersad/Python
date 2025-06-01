@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import html5lib
 import os
 
 
@@ -28,7 +27,7 @@ def read_from_file(filepath, test=0, n=5, col_Names = [], sheet = 0):
         return dataFrame
 
     elif (filetype == 'xlsx'):
-        xlFile = pd.ExcelFile(filepath)  
+        xlFile = pd.ExcelFile(filepath, engine='openpyxl')  
         sheetName = xlFile.sheet_names[sheet]
         dataFrame = xlFile.parse(f'{sheetName}')
         if (test == 0):
