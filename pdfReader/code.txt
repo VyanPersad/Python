@@ -1,0 +1,18 @@
+bounding_box = (0,210,605,625)
+#for file in os.listdir(pdf_path):
+
+with pdfplumber.open(pdf_path) as pdf:
+
+        table_settings = {
+            "vertical_strategy":"text",
+            "horizontal_strategy":"text",
+            "text_tolerance":1,
+            "min_words_horizontal":1,
+        }
+        pg = pdf.pages[0]
+        #pg.to_image().draw_rect(bounding_box).show()
+        pg_crp = pg.crop(bounding_box)
+        tables = pg_crp.extract_tables(table_settings=table_settings)
+        #print(tables)
+        for table in tables:
+            all_tables.append(table)
