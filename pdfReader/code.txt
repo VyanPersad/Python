@@ -16,3 +16,14 @@ with pdfplumber.open(pdf_path) as pdf:
         #print(tables)
         for table in tables:
             all_tables.append(table)
+
+'''
+for table in all_tables:
+    for row in table:
+        for i in range(len(row)):
+            for item in row:
+                if item == '' or item is None or item == ' ':
+                    row.remove(item)
+        if row is not None:
+            print(row)
+'''
