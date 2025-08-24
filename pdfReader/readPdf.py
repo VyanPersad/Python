@@ -1,6 +1,6 @@
 import pdfplumber, os, re
 
-pdf_path =r"C:\Users\Vyan\Downloads\PDF_297161_68367377.pdf"
+pdf_path =r"C:\Users\Vyan\Downloads\AUG_2025_TCL"
 dest_file = open('test.csv', 'a')
 all_tables = []
 cleaned_tables = []
@@ -8,7 +8,7 @@ calc_tables = []
 bounding_box = (0,210,612,625)
 for file in os.listdir(pdf_path):
 
-    with pdfplumber.open(os.join(pdf_path, file)) as pdf:
+    with pdfplumber.open(os.path.join(pdf_path, file)) as pdf:
 
             table_settings = {
                 "vertical_strategy":"explicit",
@@ -47,7 +47,7 @@ for file in os.listdir(pdf_path):
     for row in cleaned_tables:
         print(row)
 
-    for row in cleaned_tables:
-        dest_file.write(f"{",".join(row)}\n")
+    #for row in cleaned_tables:
+    #    dest_file.write(f"{",".join(row)}\n")
 
 dest_file.close()
