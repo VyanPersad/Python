@@ -37,11 +37,11 @@ for file in os.listdir(pdf_path):
             if cleaned_row != [] and len(cleaned_row)>1:
                 cleaned_row[0:1] = cleaned_row[0].split(' ', maxsplit=1)
                 cleaned_row[2:3] = cleaned_row[2].split('/', maxsplit=1)
-                cleaned_row[3:4] = cleaned_row[3].split(' ', maxsplit=1)
-                cleaned_row[5:6] = cleaned_row[5].split(' ', maxsplit=1)
                 for item in cleaned_row:
                     if item == '': 
                         cleaned_row.remove(item)
+                cleaned_row.append(round(float(cleaned_row[4])*10,2))
+                cleaned_row.append(round((cleaned_row[5]*-1.125)/(0.25-1),0))
                 cleaned_tables.append(cleaned_row)        
 
     for row in cleaned_tables:
