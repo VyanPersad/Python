@@ -1,15 +1,22 @@
 import pdfplumber, os, re
 
-pdf_path =r"C:\Users\Vyan\Downloads\AUG_2025_TCL"
+pdf_path =r"C:\Users\Vyan\Downloads\test"
 dest_file = open('test.csv', 'a')
 all_tables = []
 cleaned_tables = []
 calc_tables = []
+Servicio_bBox = (475,25,550,75)
 bounding_box = (0,210,612,625)
 for file in os.listdir(pdf_path):
 
     with pdfplumber.open(os.path.join(pdf_path, file)) as pdf:
-
+            ser_table_settings ={
+                "vertical_strategy":"explicit",
+                "explicit_vertical_lines":[480, 540],
+                "horizontal_strategy":"text",
+                "text_tolerance":15,
+                "min_words_horizontal":1,
+            }
             table_settings = {
                 "vertical_strategy":"explicit",
                 "explicit_vertical_lines":[0, 45, 330, 465, 545, 612],
@@ -20,7 +27,14 @@ for file in os.listdir(pdf_path):
             pg = pdf.pages[0]
             pg_crp = pg.crop(bounding_box)
             #pg_crp.to_image().debug_tablefinder(table_settings=table_settings).show()
+            ser_Crop = pg.crop(Servicio_bBox)
+            #ser_Crop.to_image().debug_tablefinder(table_settings=ser_table_settings).show()
             all_tables = pg_crp.extract_tables(table_settings=table_settings)
+            rwt_No=ser_Crop.extract_table(table_settings=ser_table_settings)[0]
+            rwt_No = "".join(rwt_No)
+            #all_tables.insert(0,rwt_No)
+            #print(rwt_No)
+            #print(all_tables)
 
     for table in all_tables:    
         for row in table:
@@ -34,6 +48,7 @@ for file in os.listdir(pdf_path):
                 #   cleaned_item = cleaned_item.split('/')
                 if cleaned_item != '':
                     cleaned_row.append(cleaned_item) 
+                    
             if cleaned_row != [] and len(cleaned_row)>1:
                 cleaned_row[0:1] = cleaned_row[0].split(' ', maxsplit=1)
                 cleaned_row[2:3] = cleaned_row[2].split('/', maxsplit=1)
@@ -42,8 +57,9 @@ for file in os.listdir(pdf_path):
                         cleaned_row.remove(item)
                 cleaned_row.append(round(float(cleaned_row[4])*10,2))
                 cleaned_row.append(round((cleaned_row[5]*-1.125)/(0.25-1),0))
+                cleaned_row.insert(0,rwt_No)
                 cleaned_tables.append(cleaned_row)        
-
+            
     for row in cleaned_tables:
         print(row)
 

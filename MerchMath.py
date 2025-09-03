@@ -11,3 +11,6 @@ def discount(sP, newPrice):
     disc = (sP-newPrice)/sP
     return disc
 
+def retail(Cost, Margin = 0.25):
+    retailPrice =-1.125*Cost/(Margin-1)
+    return retailPrice
