@@ -12,6 +12,8 @@ for file in os.listdir(pdf_path):
     with pdfplumber.open(os.path.join(pdf_path, file)) as pdf:
             ser_table_settings ={
                 "vertical_strategy":"explicit",
+                #This defines the vertical lines to be used to split the text into columns.
+                #TThe left and right bounds of the text.
                 "explicit_vertical_lines":[480, 540],
                 "horizontal_strategy":"text",
                 "text_tolerance":15,
