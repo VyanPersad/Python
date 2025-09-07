@@ -5,6 +5,7 @@ dest_file = open('test.csv', 'a')
 all_tables = []
 cleaned_tables = []
 inv_tables=[]
+brand_tables=[]
 calc_tables = []
 Servicio_bBox = (475,25,550,75)
 bounding_box = (0,210,612,625)
@@ -24,7 +25,7 @@ for file in os.listdir(pdf_path):
                 "vertical_strategy":"explicit",
                 "explicit_vertical_lines":[0, 25,45, 330, 465, 545, 612],
                 "horizontal_strategy":"text",
-                "text_tolerance":1,
+                "text_tolerance":2,
                 "min_words_horizontal":1,
             }
             pg = pdf.pages[0]
@@ -43,6 +44,7 @@ for file in os.listdir(pdf_path):
         for row in table:
             cleaned_row=[]
             cleaned_row_qty = []
+            brand_Arr=[]
             cleaned_item = ''
             for item in row:
                 if item is not None:
@@ -67,14 +69,18 @@ for file in os.listdir(pdf_path):
                 
                 elif len(cleaned_row)==2:
                     cleaned_row_qty = cleaned_row[0] 
+                    brand_Arr = [cleaned_row[1].split()[0]]
+                    brand_tables.append(brand_Arr)
                     inv_tables.append(cleaned_row_qty)
+                    
 
 #print(cleaned_tables)
 print(len(inv_tables))
 print(len(cleaned_tables))
+print(len(brand_tables))
 
 for n in range(0, len(cleaned_tables),1):
     row=cleaned_tables[n]
-    dest_file.write(','.join(map(str, row)) + ','+str(inv_tables[n])+'\n')
+    dest_file.write(','.join(map(str, row)) + ','+str(inv_tables[n])+','+str(brand_tables[n][0])+'\n')
 
 dest_file.close()
