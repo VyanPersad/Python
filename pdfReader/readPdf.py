@@ -1,6 +1,6 @@
 import pdfplumber, os, re
 
-pdf_path =r"C:\Users\Vyan\Downloads\AUG_2025_TCL"
+pdf_path =r"C:\Users\Vyan\Downloads\Incoming_TVs_SEP_OCT"
 dest_file = open('test.csv', 'a')
 all_tables = []
 cleaned_tables = []
@@ -9,8 +9,8 @@ brand_tables=[]
 calc_tables = []
 Servicio_bBox = (475,25,550,75)
 bounding_box = (0,210,612,625)
-for file in os.listdir(pdf_path):
 
+for file in os.listdir(pdf_path):
     with pdfplumber.open(os.path.join(pdf_path, file)) as pdf:
             ser_table_settings = {
                 "vertical_strategy":"explicit",
@@ -62,7 +62,7 @@ for file in os.listdir(pdf_path):
                     for item in cleaned_row:
                         if item == '': 
                             cleaned_row.remove(item)
-                    cleaned_row.append(round(float(cleaned_row[4])*10,2))
+                    cleaned_row.append(round(float(cleaned_row[4].replace(',', '').strip())*10,2))
                     cleaned_row.append(round((cleaned_row[5]*-1.125)/(0.25-1),0))
                     cleaned_row.insert(0,rwt_No)
                     cleaned_tables.append(cleaned_row)
@@ -73,14 +73,13 @@ for file in os.listdir(pdf_path):
                     brand_tables.append(brand_Arr)
                     inv_tables.append(cleaned_row_qty)
                     
-
 #print(cleaned_tables)
 print(len(inv_tables))
 print(len(cleaned_tables))
 print(len(brand_tables))
-
+#dest_file.write('RWT_No,Model,Item_Desc,UPC,Courts_Code,US_Unit_Price,EST_Landed_TTD,EST_Price_w_Mrgn25,QTY,Brand\n')
 for n in range(0, len(cleaned_tables),1):
     row=cleaned_tables[n]
-    dest_file.write(','.join(map(str, row)) + ','+str(inv_tables[n])+','+str(brand_tables[n][0])+'\n')
+    dest_file.write(','.join(map(str, row)) +','+str(inv_tables[n])+','+str(brand_tables[n][0])+'\n')
 
 dest_file.close()
