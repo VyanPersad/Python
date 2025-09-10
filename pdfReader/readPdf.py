@@ -1,7 +1,7 @@
 import pdfplumber, os, re
 
 pdf_path =r"C:\Users\Vyan\Downloads\Incoming_TVs_SEP_OCT"
-dest_file = open('test.csv', 'a')
+dest_file = open('final.csv', 'a')
 all_tables = []
 cleaned_tables = []
 inv_tables=[]
