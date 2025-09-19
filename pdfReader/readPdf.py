@@ -50,6 +50,7 @@ for file in os.listdir(pdf_path):
                 if item is not None:
                     cleaned_item = re.sub(r'\(cid:\d+\)','',item).strip() 
                     cleaned_item = cleaned_item.replace('US$','')  
+                    cleaned_item = cleaned_item.replace(' - ','')
                 #if "/" in cleaned_item:
                 #   cleaned_item = cleaned_item.split('/')
                 if cleaned_item != '':
@@ -77,7 +78,7 @@ for file in os.listdir(pdf_path):
 print(len(inv_tables))
 print(len(cleaned_tables))
 print(len(brand_tables))
-#dest_file.write('RWT_No,Model,Item_Desc,UPC,Courts_Code,US_Unit_Price,EST_Landed_TTD,EST_Price_w_Mrgn25,QTY,Brand\n')
+dest_file.write('RWT_No,Model,Item_Desc,UPC,Courts_Code,US_Unit_Price,EST_Landed_TTD,EST_Price_w_Mrgn25,QTY,Brand\n')
 for n in range(0, len(cleaned_tables),1):
     row=cleaned_tables[n]
     dest_file.write(','.join(map(str, row)) +','+str(inv_tables[n])+','+str(brand_tables[n][0])+'\n')

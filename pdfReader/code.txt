@@ -27,3 +27,11 @@ for table in all_tables:
         if row is not None:
             print(row)
 '''
+
+for n in range(len(unique_vals)):
+    search_val = unique_vals[n]
+    filtered_qty = df[df['Model'] == search_val]
+    sum = filtered_qty['QTY'].sum()
+    filtered_df = df[df['Model'] == search_val].iloc[0]
+    filtered_df['QTY'] = sum
+    selected_cols.append(filtered_df)

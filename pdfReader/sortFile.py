@@ -1,6 +1,6 @@
 import pandas as pd
 
-csv_path=r"C:\Users\Vyan\Documents\GitHub\Python\pdfReader\test.csv"
+csv_path=r"C:\Users\Vyan\Documents\GitHub\Python\pdfReader\final.csv"
 unique_vals = []
 selected_cols = []
 
@@ -9,18 +9,20 @@ selected_cols = []
 df = pd.read_csv(csv_path, on_bad_lines='skip')
 
 for col in df.columns:
-    unique_vals = df['Model'].unique()
-    
+    unique_vals = df['Model'].unique()    
+
 #print(len(unique_vals))
 #print(unique_vals)
 
 for n in range(len(unique_vals)):
     search_val = unique_vals[n]
-    filtered_df = df[df['Model'] == search_val] 
-    sum = filtered_df['QTY'].sum()
-    selected_cols.append(filtered_df[['RWT_No','Model','Brand','QTY']])
-    selected_cols.append(sum)     
+    filtered_qty = df[df['Model'] == search_val]
+    sum = filtered_qty['QTY'].sum()
+    filtered_df = df[df['Model'] == search_val].iloc[0]
+    filtered_df['Tot_QTY'] = sum   
+    selected_cols.append(filtered_df[['Model','Brand','Tot_QTY','EST_Landed_TTD','EST_Price_w_Mrgn25']])
+      
 
-for df in selected_cols:
-    print(df)
+final_df = pd.DataFrame(selected_cols)
+print(final_df)
 
