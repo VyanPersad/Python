@@ -20,9 +20,9 @@ for n in range(len(unique_vals)):
     sum = filtered_qty['QTY'].sum()
     filtered_df = df[df['Model'] == search_val].iloc[0]
     filtered_df['Tot_QTY'] = sum   
-    selected_cols.append(filtered_df[['Model','Brand','Tot_QTY','EST_Landed_TTD','EST_Price_w_Mrgn25']])
+    selected_cols.append(filtered_df[['Courts_Code','Model','Brand','Tot_QTY','EST_Landed_TTD','EST_Price_w_Mrgn25']])
       
-
 final_df = pd.DataFrame(selected_cols)
 print(final_df)
 
+final_df.to_csv("sorted.csv", index=False, header=True)
