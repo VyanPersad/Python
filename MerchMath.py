@@ -14,3 +14,8 @@ def discount(sP, newPrice):
 def retail(Cost, Margin = 0.25):
     retailPrice =-1.125*Cost/(Margin-1)
     return retailPrice
+
+def mgnafterSupp(cP, sP, disc, support, VAT=12.5):
+    margin = (((sP-(disc-support))/(1+(VAT/100)))-cP)/((sP-(disc-support))/(1+(VAT/100)))
+    return margin
+
