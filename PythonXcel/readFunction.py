@@ -5,6 +5,7 @@ import os
 
 def read_from_file(filepath, test=0, n=5, col_Names = [], sheet = 0):
     filetype = filepath.split('.')[1]
+    
     #This will read the csv and display the first 5 rows of the data.
     if (filetype == 'csv'):
         if (col_Names == []):
