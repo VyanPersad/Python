@@ -32,11 +32,18 @@ total_item_df = []
 model_no = df['Item Description'].str.split(' ').str[1]
 day = df['Item Delivery Date'].str.split('/').str[0].astype('Int64')
 month = df['Item Delivery Date'].str.split('/').str[1].astype('Int64')
+'''
+The above lines of code show how a particular column can be slit into multile columns and assigned to a specific variable. In this case the item description column can be split into two columns formatted as a string as indicated by the dot string method. This produces a split that is loaded into an array. It is important to note that by using the dot split method and specifying the delimiter the function works by splitting in details of the item description column into the number of columns that are ultimately delimited bt the indicated delimiter. Thus the output of is stored as an array with each of the split terms constituting a member of the arr As such we would cycle through the end using 0 as the first two and then other tubes to determine which of the values we wish to keep.
+
+When working with numbers however we have to go the additional step and convert it back into that of a number hence we cast using the astype method, With integer 64 as we know that these two variables are to be whole numbers.
+'''
 #print(model_no)
 Model_No_df = df.assign(Model_No=model_no, Day=day, Month=month)
 edited_df = Model_No_df[['Product Category','Item Number','Item Description','Item Description 2','Brand','Model_No','Item Delivery Date','Day','Month']]
 #print(edited_df)
-
+'''
+Using these entirely data can be built but it seemed that I'm matching to columns from the original data frame allowing you to keep the original data intact and then add it on this extra information gives you extra flexibility when sorting or possibly plotting graphs.
+'''
 write_to_xl_mul(edited_df, r'C:\Users\Vyan\Documents\GitHub\Python\PythonXcel\Data\Sales_data', 'Edited_Merch_Sales_Vision', sheet_name='Edited Data')
 '''
 for item in support_df.values:

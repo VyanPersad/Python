@@ -47,3 +47,12 @@ print(priceList_mod.head(5))
 search_term = r'32'
 search = priceList_mod[priceList_mod['Class'].str.contains(search_term, case=False, na=False)]
 print(search)
+
+'''
+This too is another we search 4 from a database that is loaded from a file. In this instance we loaded certain specific columns and then sorted based on was price.
+
+After we use The search term to find all the items within the class column that contains said search term. 
+
+Also when a data frame is loaded especially for numerical values said values may not be loaded as numbers they may be loaded simply as text. It is imperative that if calculations are to be done on set values then they have to be converted to a number type be it integer or float this can be done in on e of two ways one of which is to modify the data free and convert the entire column in one fell swoop as we have done here with line 43. The other is to remember to convert the value when said value is being used in calculation it should be converted before the calculation is executed.
+
+'''
