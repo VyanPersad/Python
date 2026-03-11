@@ -1,7 +1,7 @@
 import pdfplumber, os, re, math
 
-pdf_path =r"C:\Users\Vyan\Downloads\Servicio_GIS\AUG_2025_TCL"
-dest_file = open('AUG_TCL.csv', 'a')
+pdf_path =r"C:\Users\Vyan\Downloads\test"
+dest_file = open('test_path.csv', 'a')
 
 cleaned_tables = []
 inv_tables=[]
@@ -10,7 +10,7 @@ brand_tables=[]
 Servicio_bBox = (475,25,550,75)
 bounding_box = (0,210,605,625)
 '''
-This first defines the area of the PDF that will be looked at to extract the data for the tables. 
+This first defines the area of the PDF that will be looked at to extract the data for the tables. `
 
 The Dimension specified for the bounding box Represent the left boundary the upper boundary the right boundary and the lower boundary of the area to be selected. Essentially the 475 stipulate the left boundary or specifically the distance from the left boundary where the rectangle will start the 25 stipulates the upper boundary or the distance from the top of the document The 550 stipulates the right hand boundary of the bounding box from the left hand side of the document and the 75 stipulates the lower edge of the bounding box as measured from the top of the document. Essentially in this the upper left hand corner of the document would be the 00 origin point.
 '''
@@ -70,22 +70,27 @@ for file in os.listdir(pdf_path):
                 if cleaned_item != '':
                     cleaned_row.append(cleaned_item) 
             '''
-            The Bro that is being clean is temporarily assigned the variable of Clean item then a cleaned item is subsequently reattached to a new array known as clean going forward this array with the cleaned roofs will be the array that is used for the rest of the operations.
+            The row that is being clean is temporarily assigned the variable of Clean item then a cleaned item is subsequently reattached to a new array known as clean going forward this array with the cleaned roofs will be the array that is used for the rest of the operations.
 
-            So long as the clean room is not empty which is to say that it has a particular value we can that by using citizen selection criteria we can further clean and further the individual columns of the rule and make replacements as needed as well as performing mathematical calculations to get the values we want for the final table.
+            So long as the clean row is not empty which is to say that it has a particular value we can that by using citizen selection criteria we can further clean and further the individual columns of the rule and make replacements as needed as well as performing mathematical calculations to get the values we want for the final table.
 
             It is important to note I went to forming mathematical competitions we have to ensure that the values that are read from the table are in the appropriate numerical format this case we had to convert it to a float.
             '''        
             if cleaned_row !=[]:
                 try:
+                    '''
+                    So we know from the area we extract the data from only DF file We will have largely two specific rows. The first row will have information regarding the quantity to be received the brand and the model and the second row will have the model number description the specific court school as well as the estimated value for the unit cost in US dollars
+                    '''
                     if len(cleaned_row)>2:
                         '''
-                        The notation listed below is very specific and can save you quite a lot of time. What is happening here is that the first term is being spit into two parts the first part being zero and the second part being the one. From this we then indicate which of the two elements we require by the of the term in the aarray.
+                        The notation listed below is very specific and can save you quite a lot of time. What is happening here is that the first term is being spit into two parts the first part being zero and the second part being the one. From this we then indicate which of the two elements we require by the of the term in the array.
 
                         Similarly we do it for the third element in the which would have an index of 2 and we wish to split that into three of which we will take the third and further split that using the / as a delimiter.
                         '''
                         cleaned_row[0:1] = cleaned_row[0].split(' ', maxsplit=1)
+                        
                         cleaned_row[2:3] = cleaned_row[2].split('/', maxsplit=1)
+                        # Specifically it is the second element of the cleaned_row array and it is splitting it by the /. It is then re-inserting the 2 new terms into the cleaned_row array at the original and subsequent postion while shifting the rest of the elements into a new position.
                         for item in cleaned_row:
                             if item == '': 
                                 cleaned_row.remove(item)
@@ -106,9 +111,9 @@ for file in os.listdir(pdf_path):
                     print(f"Error processing row {rwt_No}: {e}")
                             
 
-print(len(inv_tables))
-print(len(cleaned_tables))
-print(len(brand_tables))
+#print(len(inv_tables))
+#print(len(cleaned_tables))
+#print(len(brand_tables))
 
 dest_file.write('RWT_No,Model,Item_Desc,UPC,Courts_Code,US_Unit_Price,EST_Landed_TTD,EST_Price_w_Mrgn25,QTY,Brand\n')
 for n in range(0, len(cleaned_tables),1):
