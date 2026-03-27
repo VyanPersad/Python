@@ -2,6 +2,7 @@ from readFunction import read_from_file
 import matplotlib.pyplot as plt
 from matplotlib.ticker import ScalarFormatter
 import numpy as np
+import seaborn as sns
 
 file_path = r'C:\Users\Vyan\Documents\GitHub\Python\PythonXcel\Data\BuyerSalesHistory.csv'
 
@@ -16,6 +17,7 @@ for index, row in df[['Sku', 'Brand','Description','Year','Cash Price','April','
         
         print(row['Sku'], [row[mon] for mon in mons])
 '''
+
 '''
 The code above allows for the reading of a csv file and the filtering of data based on user full brand and sku. They Could facilitate the searching specific columns in the CSV file iterating each of those and the details of the that matches the user input. 
 
@@ -30,7 +32,9 @@ The next step is to use another filtered data to select the data we wish to use 
 '''
 filtered_df = df[(df['Year'] == 'This Year')
                 & 
-                (df['Cash Price'] < 70000)
+                (df['Cash Price'] < 25000)
+                &
+                (df['Year to Date'] > 40)
                 &
                 (df['Brand']== 'TCL') |
                 (df['Brand']== 'SAMSUNG') | 
@@ -42,6 +46,7 @@ Note how the specific columns that are searched along their conditions and are r
 grouped_df = filtered_df.groupby('Brand')
 '''
 The grouped by dataframe utilizes the group by function within Python to better sort the given the specific column name this goes a long way in helping to better organize the data and make it readable once plotted.
+'''
 '''
 for brand_name, grouped_by_df in grouped_df:
     x_vals = grouped_by_df['Sku'].tolist()
@@ -59,3 +64,20 @@ plt.ylabel("Cash Price ($)")
 plt.ylim(0, 20000)
 plt.grid('both')
 plt.show()
+'''
+max_price = grouped_df['Cash Price'].max()
+max_sales = grouped_df['Year to Date'].max()
+
+sns.scatterplot(data=filtered_df, x='Cash Price', y='Year to Date', hue='Brand')
+plt.legend(title="Brand")   
+y_formatter = ScalarFormatter()
+y_formatter.set_scientific(False)
+plt.gca().yaxis.set_major_formatter(y_formatter)
+plt.xticks([])
+plt.xlabel("Cash Price ($)")
+plt.ylabel("Year to Date")
+plt.ylim(0, max_sales.max() + 1000)
+plt.grid('both')
+plt.grid(True, axis="x", linestyle="--", color="gray", alpha=0.7)
+plt.show()
+
