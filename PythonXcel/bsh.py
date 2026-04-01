@@ -21,7 +21,7 @@ for index, row in df[['Sku', 'Brand','Description','Year','Cash Price','April','
 '''
 The code above allows for the reading of a csv file and the filtering of data based on user full brand and sku. They Could facilitate the searching specific columns in the CSV file iterating each of those and the details of the that matches the user input. 
 
-For the code above it is important to note that we don't lewd the entire data free from the CSV we in this essence create a second data where we stipulate the column names as defined by the existing CSV file that we wish to load and it is from this we further filter the details indicating by the Col which column we wish to filter and the subsequent filter term.
+For the code above it is important to note that we don't load the entire data free from the CSV we in this essence create a second data where we stipulate the column names as defined by the existing CSV file that we wish to load and it is from this we further filter the details indicating by the Col which column we wish to filter and the subsequent filter term.
 
 For the code below however is slightly different approach is taken in that we create a filtered data frame that is filtered based on the user input. It highlights all the various columns to which we intend to search on the accompanying search term which will then be to make the filtered data frame This filtered data frame is then further processed by using the group by function which essentially allows for grouping by in this instance the column name of brand and this is then to make a scatterplot.
 '''

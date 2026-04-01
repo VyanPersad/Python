@@ -4,6 +4,9 @@ from xlsxwriter import Workbook
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+import datetime as dt
+
+curr_date = dt.datetime.now().strftime('%d.%m.%Y')
 
 file_path = r'C:\Users\Vyan\Documents\GitHub\Python\PythonXcel\Data\STOCK QUERY FILE.xlsx'
 
@@ -20,9 +23,8 @@ Loc_Name = df[
     (df['SKU'].str.startswith('O') == False)
 ]
 
-Loc_Name = Loc_Name['Model No.']
-
-table = Loc_Name.pivot_table(index='SKU', 
+table = Loc_Name.pivot_table(
+                       index='SKU', 
                        columns='LocationName', 
                        values='StockOnHand', 
                        aggfunc=sum,
@@ -30,7 +32,8 @@ table = Loc_Name.pivot_table(index='SKU',
                        margins=True,
                        margins_name='Total'
                        )
-to_print = r'Data\Current_Dist.xlsx'
+
+to_print = r'Data\Combined_Current_Distribution_{curr_date}.xlsx'
 with pd.ExcelWriter(to_print, engine='xlsxwriter') as writer:
     table.to_excel(writer, sheet_name='CurrDist')
 
@@ -41,6 +44,11 @@ with pd.ExcelWriter(to_print, engine='xlsxwriter') as writer:
     worksheet = writer.sheets['CurrDist']
     worksheet.autofilter(0, 0, max_row, max_col)
 
+    red_fill = wrkbook.add_format({
+        'bg_color': '#FFC7CE',
+        'font_color': '#9C0006'
+    })
+
     header_format = wrkbook.add_format({
         'bold': True,
         'rotation': 90,
@@ -49,6 +57,14 @@ with pd.ExcelWriter(to_print, engine='xlsxwriter') as writer:
         'border': 1
     })
 
+    cond_format = {
+        'type':     'cell',
+        'criteria': '>',
+        'value':    1,
+        'format':   red_fill
+    }
+
     for col_num, value in enumerate(table.columns.values):
         worksheet.write(0, col_num + 1, value, header_format)
+        worksheet.conditional_format(1, col_num + 1, max_row, max_col, cond_format)
 
