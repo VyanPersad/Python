@@ -16,12 +16,20 @@ vision_Filter = df[df['Department'].str.contains('VISION', na=False)]
 audio_Filter = df[df['Department'].str.contains('AUDIO', na=False)]
 gaming_Filter = df[df['Department'].str.contains('GAMING', na=False)]
 
-grouped_df = vision_Filter[['Class', 'Brand', 'Code Courts', 'Model','Description','Expected Delivery Date','Pending']]
+major_Filter = df[
+                  (df['Department'].str.contains('VISION', na=False)) |
+                  (df['Department'].str.contains('AUDIO', na=False)) |
+                  (df['Department'].str.contains('GAMING', na=False))
+                  ]
 
+grouped_df = major_Filter[['Class', 'Brand', 'Code Courts', 'Model','Description','Expected Delivery Date','Pending']]
+
+'''
 date_df = grouped_df[
     (grouped_df['Expected Delivery Date'].dt.year == this_yr) 
     & 
     (grouped_df['Expected Delivery Date'].dt.month == curr_mon)]
+'''
 
-st.dataframe(date_df, height=800)
+st.dataframe(grouped_df, height=800)
 st.set_page_config(layout="wide")

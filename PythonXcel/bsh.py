@@ -19,7 +19,7 @@ for index, row in df[['Sku', 'Brand','Description','Year','Cash Price','April','
 '''
 
 '''
-The code above allows for the reading of a csv file and the filtering of data based on user full brand and sku. They Could facilitate the searching specific columns in the CSV file iterating each of those and the details of the that matches the user input. 
+The code above allows for the reading of a csv file and the filtering of data based on user full brand and sku. This could facilitate the searching specific columns in the CSV file iterating each of those and the details of the that matches the user input. 
 
 For the code above it is important to note that we don't load the entire data free from the CSV we in this essence create a second data where we stipulate the column names as defined by the existing CSV file that we wish to load and it is from this we further filter the details indicating by the Col which column we wish to filter and the subsequent filter term.
 
