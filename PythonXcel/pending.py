@@ -1,6 +1,5 @@
 from readFunction import read_from_file
 import datetime as dt
-import streamlit as st
 import pandas as pd
 
 this_yr = dt.datetime.now().year
@@ -31,5 +30,4 @@ date_df = grouped_df[
     (grouped_df['Expected Delivery Date'].dt.month == curr_mon)]
 '''
 
-st.dataframe(grouped_df, height=800)
-st.set_page_config(layout="wide")
+

@@ -68,6 +68,7 @@ plt.show()
 max_price = grouped_df['Cash Price'].max()
 max_sales = grouped_df['Year to Date'].max()
 
+'''
 sns.scatterplot(data=filtered_df, x='Cash Price', y='Year to Date', hue='Brand')
 plt.legend(title="Brand")   
 y_formatter = ScalarFormatter()
@@ -80,4 +81,6 @@ plt.ylim(0, max_sales.max() + 1000)
 plt.grid('both')
 plt.grid(True, axis="x", linestyle="--", color="gray", alpha=0.7)
 plt.show()
-
+'''
+sns.pairplot(filtered_df[['Brand','Cash Price','Year to Date']], hue='Brand')
+plt.show()

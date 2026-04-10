@@ -16,7 +16,7 @@ Loc_Name = df[
     (df['SKU'].str.startswith('T') == False)
     &
     (df['SKU'].str.startswith('O') == False)
-    ]
+]
 
 table = Loc_Name.pivot_table(
                        index=['SKU','PosDescription'], 
