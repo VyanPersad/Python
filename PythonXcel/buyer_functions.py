@@ -18,4 +18,14 @@ Product_List = TY_df[['Sku', 'Brand','Description']]
 Product_List['Model'] = Product_List['Description'].str.split(' ', n=1, expand=True)[0]
 Product_List['Description'] = Product_List['Description'].str.split(' ', n=2, expand=True)[2]
 
-print(Product_List)
+product_dist = TY_df.groupby('Brand')['Year to Date'].sum().reset_index().sort_values(by='Year to Date', ascending=False)
+
+Total = product_dist['Year to Date'].sum()
+
+product_dist_by_mon = TY_df[['Brand', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'January', 'February', 'March','Year to Date']].groupby('Brand').sum()
+
+product_dist_by_mon = ((product_dist_by_mon/Total)*100).round(2)
+product_dist_by_mon = product_dist_by_mon.reset_index().sort_values(by='Year to Date', ascending=False)
+
+print(product_dist_by_mon)
+
