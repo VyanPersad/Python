@@ -5,13 +5,20 @@ import numpy as np
 import seaborn as sns
 
 file_path = r'C:\Users\Vyan\Documents\GitHub\Python\PythonXcel\Data\BuyerSalesHistory.csv'
+file_path2 = r'C:\Users\Vyan\Documents\GitHub\Python\PythonXcel\Data\Inventory_V.xlsx'
 
 df = read_from_file(filepath=file_path, test=0)
+df2 = read_from_file(filepath=file_path2, sheet = 1 ,test=0)
+df2 = df2.rename(columns={'SKU':'Sku', 'BRAND':'Brand', 'DESC':'Description'})
 
 mons = ['April','May','June','July','August','September','October','November','December','January','February','March']
 
 TY_df = df[(df['Year'] == 'This Year')]
 LY_df = df[(df['Year'] == 'Last Year')]
+
+merged_df = TY_df.merge(df2, on='Sku', how='outer')
+print(merged_df)
+
 
 Brand_List = TY_df['Brand'].unique().tolist()
 #Product_List = TY_df[['Sku', 'Brand','Description']]
@@ -37,4 +44,4 @@ stripplotdata = TY_df[['Sku', 'Brand', 'Description', 'Cash Price','Year to Date
 
 Sales_df = TY_df.iloc[:, np.r_[0,2, 10:22]].groupby(TY_df.columns[2]).sum().reset_index()
 
-print(Sales_df)
+#print(Sales_df)
