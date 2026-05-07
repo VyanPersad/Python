@@ -1,6 +1,5 @@
 from readFunction import read_from_file
 import pandas as pd
-import matplotlib.pyplot as plt
 from matplotlib.ticker import ScalarFormatter
 import numpy as np
 from MerchMath import marginOnCost
@@ -22,7 +21,6 @@ df['Margin'] = df.apply(lambda row: marginOnCost(row['Cost'], row['Price'],VAT=1
 df['Disc'] = np.where(df['Margin'] > 0.25, calcDisc(df['Cost'], df['Price'], .25), 0).round(-2)
 
 df['Now Price'] = df['Price'] - df['Disc'].round(-2)
-df['Now Price'] =df['Now Price'].round(0)
 
 df['New Mrgn'] = df.apply(lambda row: marginOnCost(row['Cost'], row['Now Price'], VAT=12.5), axis=1).round(2)
 
