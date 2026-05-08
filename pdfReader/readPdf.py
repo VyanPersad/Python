@@ -104,9 +104,9 @@ for file in os.listdir(pdf_path):
                     
                     elif len(cleaned_row)==2:
                         cleaned_row_qty = cleaned_row[0] 
-                        brand_Arr = [cleaned_row[1].split()[0]]
+                        brand_Arr = cleaned_row[1].split()[0]
                         brand_tables.append(brand_Arr)
-                        model_arr.append(cleaned_row[1].split()[1])
+                        model_arr = cleaned_row[1].split()[1]
                         model_tables.append(model_arr)
                         inv_tables.append(cleaned_row_qty)
                 
