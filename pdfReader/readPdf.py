@@ -1,11 +1,12 @@
 import pdfplumber, os, re, math
 
-pdf_path =r"C:\Users\Vyan\Downloads\test"
+pdf_path =r"C:\Users\Vyan\Downloads\TCL_MAY_2026"
 dest_file = open('test_path.csv', 'a')
 
 cleaned_tables = []
 inv_tables=[]
 brand_tables=[]
+model_tables = []
 
 Servicio_bBox = (475,25,550,75)
 bounding_box = (0,210,605,625)
@@ -55,9 +56,10 @@ for file in os.listdir(pdf_path):
         '''
     for table in all_tables:   
         for row in table:
-            cleaned_row=[]
+            cleaned_row= []
             cleaned_row_qty = []
-            brand_Arr=[]
+            brand_Arr= []
+            model_arr = []
             cleaned_item = ''
             for item in row:
                 if item is not None:
@@ -104,22 +106,27 @@ for file in os.listdir(pdf_path):
                         cleaned_row_qty = cleaned_row[0] 
                         brand_Arr = [cleaned_row[1].split()[0]]
                         brand_tables.append(brand_Arr)
+                        model_arr.append(cleaned_row[1].split()[1])
+                        model_tables.append(model_arr)
                         inv_tables.append(cleaned_row_qty)
                 
-                    print(cleaned_row)
+                    #print(cleaned_row)
                 except Exception as e:
                     print(f"Error processing row {rwt_No}: {e}")
                             
 
-#print(len(inv_tables))
-#print(len(cleaned_tables))
-#print(len(brand_tables))
+print(inv_tables)
+print('/n')
+print(cleaned_tables)
+print('/n')
+print(brand_tables)
+print('/n')
+print(model_tables)
 
 dest_file.write('RWT_No,Model,Item_Desc,UPC,Courts_Code,US_Unit_Price,EST_Landed_TTD,EST_Price_w_Mrgn25,QTY,Brand\n')
 for n in range(0, len(cleaned_tables),1):
     row=cleaned_tables[n]
-    dest_file.write(','.join(map(str, row)) +','+str(inv_tables[n])+','+str(brand_tables[n][0])+'\n')
-
+    dest_file.write(','.join(map(str, row)) +','+str(inv_tables[n])+','+str(brand_tables[n])+','+str(model_tables[n])+'\n')
 
 dest_file.close()
 
