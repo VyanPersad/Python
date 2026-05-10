@@ -15,7 +15,7 @@ with pd.ExcelWriter(f'{fileName}.xlsx', engine='openpyxl') as writer:
         rowCount = rowCount + len(dataframe)+2    
 
 '''
-So this simply combines multiple files into one data set and outputs it onto 1 sheet In an entirely new Excel file.
+So this simply combines multiple files into one data set and outputs it onto 1 sheet in an entirely new Excel file.
 
 The the basic explanation of it is that it uses Pandas accelerator to read the file name using the Open PYXL engine.
 
