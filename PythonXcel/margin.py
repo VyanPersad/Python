@@ -18,7 +18,9 @@ df = df.rename(columns=
 df['Cost'] = df['Cost'].round(2)
 df['Margin'] = df.apply(lambda row: marginOnCost(row['Cost'], row['Price'],VAT=12.5), axis=1).round(2)
 
-df['Disc'] = np.where(df['Margin'] > 0.25, calcDisc(df['Cost'], df['Price'], .25), 0).round(-2)
+df['Disc'] = np.where(df['Margin'] > 0.25, 
+                      calcDisc(df['Cost'], df['Price'], .25), 
+                      0).round(-2)
 
 df['Now Price'] = df['Price'] - df['Disc'].round(-2)
 
@@ -34,4 +36,4 @@ df_filtered = df[
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
 print(df_filtered[['Sku', 'Brand', 'Description', 'Cost', 'Price', 'Margin', 'Disc',
-'Now Price', 'New Mrgn', 'Stock']].sort_values(by='Stock', ascending=False))
+'Now Price', 'New Mrgn', 'Stock']].sort_values(by='Stock', ascending=False).nlargest(20, 'Stock'))

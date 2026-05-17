@@ -12,10 +12,12 @@ items = [
     ('SAMSUNG','QN65Q7FAAPXPA',19,31,171)
         ]
 
-brand = df['Item Description'].str.split(' ').str[0]
-model_no = df['Item Description'].str.split(' ').str[1]
-day = df['Item Delivery Date'].str.split('/').str[0].astype('Int64')
-month = df['Item Delivery Date'].str.split('/').str[1].astype('Int64')
+desc_info = df['Item Description'].str.split(' ')
+date_info = df['Item Delivery Date'].str.split('/')
+brand = desc_info.str[0]
+model_no = desc_info.str[1]
+day = date_info.str[0].astype('Int64')
+month = date_info.str[1].astype('Int64')
 
 Model_No_df = df.assign(Brand=brand, Model_No=model_no, Day=day, Month=month)
 
@@ -24,8 +26,8 @@ edited_df = Model_No_df[['Product Category','Item Number','Item Description','It
 total_item_df = []
 for item in items:
     item_df=edited_df[
-        (edited_df['Brand']== item[0]) & 
-        (edited_df['Model_No']== item[1]) &
+        (edited_df['Brand'] == item[0]) & 
+        (edited_df['Model_No'] == item[1]) &
         (edited_df['Day'] >= item[2]) & 
         (edited_df['Day'] <= item[3])
     ]
@@ -48,7 +50,7 @@ When working with numbers however we have to go the additional step and convert 
 
 Using these entirely data can be built but it seemed that I'm matching to columns from the original data frame allowing you to keep the original data intact and then add it on this extra information gives you extra flexibility when sorting or possibly plotting graphs.
 '''
-#write_to_xl_mul(edited_df, r'C:\Users\Vyan\Documents\GitHub\Python\PythonXcel\Data\Sales_data', #'Edited_Merch_Sales_Vision', sheet_name='Edited Data')
+write_to_xl_mul(edited_df, r'C:\Users\Vyan\Documents\GitHub\Python\PythonXcel\Data\Sales_data', 'Edited_Merch_Sales_Vision', sheet_name='Edited Data')
 '''
 samsung_count = item_df['Model_No'].value_counts()
 samsung_count = item_df.groupby(['Item Number','Model_No']).size().sort_values(ascending=False)

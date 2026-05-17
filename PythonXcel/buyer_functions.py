@@ -8,17 +8,17 @@ file_path = r'C:\Users\Vyan\Documents\GitHub\Python\PythonXcel\Data\BuyerSalesHi
 file_path2 = r'C:\Users\Vyan\Documents\GitHub\Python\PythonXcel\Data\Inventory_V.xlsx'
 
 df = read_from_file(filepath=file_path, test=0)
+df = df.rename(columns={'Sku':'SKU', 'BRAND':'Brand', 'DESC':'Description'}) 
 df2 = read_from_file(filepath=file_path2, sheet = 1 ,test=0)
-df2 = df2.rename(columns={'SKU':'Sku', 'BRAND':'Brand', 'DESC':'Description'})
+df2 = df2.rename(columns={'Sku':'SKU', 'BRAND':'Brand', 'DESC':'Description'})
 
 mons = ['April','May','June','July','August','September','October','November','December','January','February','March']
 
 TY_df = df[(df['Year'] == 'This Year')]
 LY_df = df[(df['Year'] == 'Last Year')]
 
-merged_df = TY_df.merge(df2, on='Sku', how='outer')
+merged_df = df.merge(df2[['SKU','CLASS']], on='SKU', how='inner')
 print(merged_df)
-
 
 Brand_List = TY_df['Brand'].unique().tolist()
 #Product_List = TY_df[['Sku', 'Brand','Description']]
@@ -33,15 +33,15 @@ product_dist_by_mon = TY_df[['Brand', 'April', 'May', 'June', 'July', 'August', 
 
 #product_dist_by_mon = ((product_dist_by_mon/Total)*100).round(2)
 #product_dist_by_mon = product_dist_by_mon.reset_index().#sort_values(by='Year to Date', ascending=False)
-replotdata = TY_df[['Sku', 'Brand', 'Cash Price', 'Year to Date']].nlargest(100, 'Year to Date')
+#replotdata = TY_df[['Sku', 'Brand', 'Cash Price', 'Year to Date']].nlargest(100, 'Year to Date')
 
-stripplotdata = TY_df[['Sku', 'Brand', 'Description', 'Cash Price','Year to Date']].nlargest(100, 'Year to Date')
+#stripplotdata = TY_df[['Sku', 'Brand', 'Description', 'Cash Price','Year to Date']].nlargest(100, 'Year to Date')
 
 #sns.stripplot(x='Brand', y='Cash Price', data=stripplotdata)
 #sns.swarmplot(x='Brand', y='Cash Price', data=stripplotdata)
 #sns.relplot(x='Cash Price', y='Year to Date', data=replotdata, #hue='Brand', size='Year to Date', sizes=(20, 200), alpha=0.7)
 #plt.show()
 
-Sales_df = TY_df.iloc[:, np.r_[0,2, 10:22]].groupby(TY_df.columns[2]).sum().reset_index()
+#Sales_df = TY_df.iloc[:, np.r_[0,2, 10:22]].groupby(TY_df.columns[2]).sum().reset_index()
 
 #print(Sales_df)
