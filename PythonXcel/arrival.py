@@ -1,0 +1,19 @@
+from calendar import Month
+
+from readFunction import read_from_file
+import pandas as pd
+import datetime as dt
+
+file_path = r'C:\Users\Vyan\Documents\GitHub\Python\PythonXcel\Data\Arriving_Soon.xlsx'
+
+df = read_from_file(filepath=file_path, test=0)
+
+filter_df = df[['STATUS', 'RWT', 'ETA', 'CONTAINER#', 'SUPPLIER', 'DESCRIPTIONS']]
+
+date = pd.to_datetime(filter_df['ETA'].astype(str), errors='coerce')
+
+filter_df['Month'] = date.dt.month
+filter_df['Year'] = date.dt.year
+
+test = filter_df[filter_df['Year'] >= 2026]
+print(test)
