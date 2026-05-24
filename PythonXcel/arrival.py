@@ -15,5 +15,12 @@ date = pd.to_datetime(filter_df['ETA'].astype(str), errors='coerce')
 filter_df['Month'] = date.dt.month
 filter_df['Year'] = date.dt.year
 
-test = filter_df[filter_df['Year'] >= 2026]
+search_terms = 'TV | SoundBar| Audio | Speaker | Home Theater | Projector | Monitor | Display | Screen | Mini-System'
+
+test = filter_df[
+    (filter_df['Year'] >= 2026)
+    &
+    (filter_df['DESCRIPTIONS'].str.contains(search_terms, case=False, na=False))
+    ]
+test = test.sort_values(by='Month', ascending=True)
 print(test)
