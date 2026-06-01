@@ -10,12 +10,13 @@ df = read_from_file(filepath=file_path, test=0)
 
 filter_df = df[['STATUS', 'RWT', 'ETA', 'CONTAINER#', 'SUPPLIER', 'DESCRIPTIONS']]
 
-date = pd.to_datetime(filter_df['ETA'].astype(str), errors='coerce')
+date = pd.to_datetime(filter_df['ETA'], errors='coerce')
 
-filter_df['Month'] = date.dt.month
-filter_df['Year'] = date.dt.year
+filter_df['ETA'] = date.dt.date
+filter_df['Month'] = date.dt.month.astype('Int64')
+filter_df['Year'] = date.dt.year.astype('Int64')
 
-search_terms = 'TV | SoundBar| Audio | Speaker | Home Theater | Projector | Monitor | Display | Screen | Mini-System'
+search_terms = 'TV|SoundBar|Audio|Speaker|Home Theater|Projector|Monitor|Display|Screen|Mini-System'
 
 test = filter_df[
     (filter_df['Year'] >= 2026)

@@ -5,7 +5,6 @@ import datetime as dt
 file_path = r'C:\Users\Vyan\Documents\GitHub\Python\PythonXcel\Data\STOCK QUERY FILE.xlsx'
 curr_date = dt.datetime.now().strftime('%d.%m.%Y')
 
-
 df = read_from_file(filepath=file_path, sheet=3, test=0)
 #print(df)
 
