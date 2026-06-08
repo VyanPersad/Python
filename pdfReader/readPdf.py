@@ -50,15 +50,15 @@ for file in os.listdir(pdf_path):
     except Exception as e:
         continue
         '''
-        The code below now begins the process of iterating through all the tables now 4 every rule in the table we I want to extract certain pieces of information.
+        The code below now begins the process of iterating through all the tables now 4 every rule in the table we want to extract certain pieces of information.
 
-        Given the nature of what was extracted a fair of cleaning is required and so the next few lines of code perform those operations over all the characters within the row wherever we see certain combinations of text and symbols they are replaced with blanks Where we see commas or possibly dashes they are also replaced with blanks.
+        Given the nature of what was extracted a fair bit of cleaning is required and so the next few lines of code perform those operations over all the characters within the row wherever we see certain combinations of text and symbols they are replaced with blanks Where we see commas or possibly dashes they are also replaced with blanks.
         '''
     for table in all_tables:   
         for row in table:
-            cleaned_row= []
+            cleaned_row = []
             cleaned_row_qty = []
-            brand_Arr= []
+            brand_Arr = []
             model_arr = []
             cleaned_item = ''
             for item in row:
@@ -72,11 +72,11 @@ for file in os.listdir(pdf_path):
                 if cleaned_item != '':
                     cleaned_row.append(cleaned_item) 
             '''
-            The row that is being clean is temporarily assigned the variable of Clean item then a cleaned item is subsequently reattached to a new array known as clean going forward this array with the cleaned roofs will be the array that is used for the rest of the operations.
+            The row that is being cleaned is temporarily assigned the variable of Clean item then a cleaned item is subsequently reattached to a new array known as clean going forward this array with the cleaned rows will be the array that is used for the rest of the operations.
 
             So long as the clean row is not empty which is to say that it has a particular value we can that by using citizen selection criteria we can further clean and further the individual columns of the rule and make replacements as needed as well as performing mathematical calculations to get the values we want for the final table.
 
-            It is important to note I went to forming mathematical competitions we have to ensure that the values that are read from the table are in the appropriate numerical format this case we had to convert it to a float.
+            It is important to note I went to perform mathematical computations we have to ensure that the values that are read from the table are in the appropriate numerical format this case we had to convert it to a float.
             '''        
             if cleaned_row !=[]:
                 try:

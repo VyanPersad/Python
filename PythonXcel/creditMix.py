@@ -11,8 +11,7 @@ total_item_df = []
 day = df['datedel'].dt.day
 month = df['datedel'].dt.month
 df = df.assign(day=day, month=month)
-df = df[(df['Department'] == 'VISION')&
-        (df['itemno'] == '10612F')]
+df = df[(df['Department'] == 'VISION')&(df['itemno'] == '10612F')]
 df['total_quantity'] = df.groupby(['itemno','itemdescr1','Brand'])['quantity'].transform('sum')
 df= df.drop_duplicates(subset=['itemno'])
 print(df)
