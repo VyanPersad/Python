@@ -18,7 +18,7 @@ TY_df = df[(df['Year'] == 'This Year')]
 LY_df = df[(df['Year'] == 'Last Year')]
 
 merged_df = df.merge(df2[['SKU','CLASS']], on='SKU', how='inner')
-print(merged_df)
+#print(merged_df)
 
 Brand_List = TY_df['Brand'].unique().tolist()
 #Product_List = TY_df[['Sku', 'Brand','Description']]
@@ -43,5 +43,3 @@ product_dist_by_mon = TY_df[['Brand', 'April', 'May', 'June', 'July', 'August', 
 #plt.show()
 
 #Sales_df = TY_df.iloc[:, np.r_[0,2, 10:22]].groupby(TY_df.columns[2]).sum().reset_index()
-
-#print(Sales_df)

@@ -1,0 +1,3 @@
+Empty DataFrame
+Columns: [STATUS, RWT, ETA, CONTAINER#, SUPPLIER, DESCRIPTIONS, Month, Year, Class, Brand, Code Courts, Model, Description, PO, Expected Delivery Date, Pending]
+Index: []
