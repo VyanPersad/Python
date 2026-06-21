@@ -27,7 +27,6 @@ date_df = grouped_df[
     |
     (grouped_df['Expected Delivery Date'].dt.month == next_mon))
     ]
-print(date_df.head(10))
 
 file_path_2 = r'C:\Users\Vyan\Documents\GitHub\Python\PythonXcel\Data\Arriving_Soon.xlsx'
 df_2 = read_from_file(filepath=file_path_2, test=0)
@@ -49,7 +48,6 @@ arrival_df = filter_df[
     ]
 
 arrival_df = arrival_df.sort_values(by='Month', ascending=True)
-print(arrival_df.head(10))
 
 '''
 with open("test_output.txt", 'w') as file:
