@@ -10,6 +10,7 @@ df = read_from_file(filepath=file_path, sheet=3, test=0)
 #print(df)
 
 stor_List = df['LocationName'].unique()
+
 sku_list = df['SKU'].unique().tolist()
 
 code_filter = df[
@@ -40,6 +41,7 @@ for brand in brnd_arr:
                         margins_name='Total'
                         )
 
+    '''      '''
     locs = [tot for tot in table.columns if tot != 'Total']
     loc_rnk = table.iloc[:-1][locs].sum().sort_values(ascending=False).index
     table = table[list(loc_rnk) + ['Total']]
@@ -48,12 +50,12 @@ for brand in brnd_arr:
     with pd.ExcelWriter(to_print, engine='xlsxwriter') as writer:
         table.to_excel(writer, sheet_name='Summary')
 
-        max_row = table.shape[0]
-        max_col = table.shape[1]
+        #max_row = table.shape[0]
+        #max_col = table.shape[1]
 
         wrkbook = writer.book
         worksheet = writer.sheets['Summary']
-        worksheet.autofilter(0, 0, max_row, max_col)
+        #worksheet.autofilter(0, 0, max_row, max_col)
 
         header_format = wrkbook.add_format({
             'font_size': 8,
@@ -86,13 +88,15 @@ for brand in brnd_arr:
         worksheet.set_column(0,0, 10, col_format)
         worksheet.set_column(1,1, 10, col_format)
         worksheet.set_column(2,2, 70, left_align)
+        
 
         worksheet.write(0,0, 'SKU', index_format)
         worksheet.write(0,1, 'Brand', index_format)
-        worksheet.write(0,2, 'PosDescription', index_format)   
+        worksheet.write(0,2, 'PosDescription', index_format)  
+        worksheet.write(3,50, header_format) 
 
-        for col in range (3, max_col):
-            worksheet.set_column(col, col, 5, col_format)
-            worksheet.write(0, col, table.columns[col], header_format)
-
+        #for col in range (3, max_col):
+        #    worksheet.set_column(col, col, 5, col_format)
+        #    worksheet.write(0, col, table.columns[col], header_format)
+   
 print('Reports generated successfully!')
